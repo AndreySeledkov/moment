@@ -39,21 +39,17 @@ public class SaleDaoImpl extends AbstractDao<Integer, Sale> implements SaleDao {
     @Override
     public List<Sale> findByDiscount(int discount) {
         Session session = getSessionFactory().getCurrentSession();
-        List<Sale> salesProduct = session.createQuery("from Sale where discount = :discount")
+        return session.createQuery("from Sale where discount = :discount")
                 .setParameter("discount", discount)
                 .getResultList();
-        return salesProduct;
     }
 
     @Override
     public List<Sale> getSalesProduct(LocalDate start, LocalDate end) {
         Session session = getSessionFactory().getCurrentSession();
-        List<Sale> salesProduct = session.createQuery("from Sale as s where s.date between :stDate and :edDate ")
+        return session.createQuery("from Sale as s where s.date between :stDate and :edDate ")
                 .setParameter("stDate", start)
                 .setParameter("edDate", end)
                 .list();
-
-
-        return salesProduct;
     }
 }
